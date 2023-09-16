@@ -17,4 +17,4 @@ def favour_picture(mixer, exists_user):
 
 def test_str(favour_picture, exists_user):
     """Test FavouritePicture string representation."""
-    assert str(favour_picture) == '<Picture 89 by {0}>'.format(exists_user.id)
+    assert str(favour_picture) == '<Picture 10 by {0}>'.format(exists_user.id)

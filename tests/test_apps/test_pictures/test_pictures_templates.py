@@ -1,4 +1,5 @@
 import pytest
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.test import RequestFactory
 
@@ -23,7 +24,7 @@ def test_registration(favourite_pictures):
         },
     )
 
-    assert isinstance(page, str)
+    assert isinstance(page, HttpResponse)
 
 
 def test_index():
@@ -33,4 +34,4 @@ def test_index():
         'pictures/pages/index.html',
     )
 
-    assert isinstance(page, str)
+    assert isinstance(page, HttpResponse)

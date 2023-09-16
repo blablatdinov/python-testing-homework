@@ -1,4 +1,5 @@
 import pytest
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.test import RequestFactory
 
@@ -11,7 +12,7 @@ def test_base():
     """Test base template."""
     page = render(RequestFactory().get('/'), 'common/_base.html')
 
-    assert isinstance(page, str)
+    assert isinstance(page, HttpResponse)
 
 
 def test_messages():
@@ -20,4 +21,4 @@ def test_messages():
         'messages': ['First', 'second'],
     })
 
-    assert isinstance(page, str)
+    assert isinstance(page, HttpResponse)

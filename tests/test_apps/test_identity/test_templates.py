@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.test import RequestFactory
 
@@ -14,4 +15,4 @@ def test_registration():
         },
     )
 
-    assert isinstance(page, str)
+    assert isinstance(page, HttpResponse)
