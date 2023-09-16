@@ -6,7 +6,6 @@ It may be also used for extending doctest's context:
 2. https://docs.pytest.org/en/latest/doctest.html
 """
 import pytest
-from django.test.client import Client
 
 pytest_plugins = [
     # Should be the first custom one:
@@ -30,7 +29,7 @@ def exists_user(mixer):
 
 
 @pytest.fixture()
-def user_client(exists_user, client: Client):
+def user_client(exists_user, client):
     """Registered user HTTP client."""
     client.force_login(exists_user)
     return client
