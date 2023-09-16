@@ -8,6 +8,5 @@ pytestmark = [
 
 
 def test_favourites_form(exists_user):
-    form = FavouritesForm(user=exists_user)
-
-    form.save(False)
+    """Test favourites form."""
+    FavouritesForm(user=exists_user).save(False)

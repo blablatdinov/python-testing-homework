@@ -8,10 +8,16 @@ pytestmark = [
 
 
 def test_base():
+    """Test base template."""
     page = render(RequestFactory().get('/'), 'common/_base.html')
+
+    assert isinstance(page, str)
 
 
 def test_messages():
+    """Test messages template."""
     page = render(RequestFactory().get('/'), 'common/includes/messages.html', {
         'messages': ['First', 'second'],
     })
+
+    assert isinstance(page, str)

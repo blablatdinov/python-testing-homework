@@ -1,4 +1,5 @@
 import pytest
+
 from server.apps.identity.models import User
 
 pytestmark = [
@@ -7,5 +8,9 @@ pytestmark = [
 
 
 def test_without_email():
-    with pytest.raises(ValueError):
-        User.objects.create_user(email='', password='SeCr3t')
+    """Test create user via manager with incorrect email."""
+    with pytest.raises(ValueError, match='Users must have an email address'):
+        User.objects.create_user(  # noqa: S106 not secure issue
+            email='',
+            password='SeCr3t',
+        )

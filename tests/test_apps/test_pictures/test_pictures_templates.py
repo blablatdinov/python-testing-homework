@@ -9,14 +9,28 @@ pytestmark = [
 
 @pytest.fixture()
 def favourite_pictures(mixer):
+    """Exists favourite pictures."""
     return mixer.cycle(5).blend('pictures.FavouritePicture')
 
 
 def test_registration(favourite_pictures):
-    page = render(RequestFactory().get('/pictures/favourites'), 'pictures/pages/favourites.html', {
-        'object_list': favourite_pictures,
-    })
+    """Test register favourite picture template."""
+    page = render(
+        RequestFactory().get('/pictures/favourites'),
+        'pictures/pages/favourites.html',
+        {
+            'object_list': favourite_pictures,
+        },
+    )
+
+    assert isinstance(page, str)
 
 
 def test_index():
-    page = render(RequestFactory().get('/pictures'), 'pictures/pages/index.html')
+    """Test index page template."""
+    page = render(
+        RequestFactory().get('/pictures'),
+        'pictures/pages/index.html',
+    )
+
+    assert isinstance(page, str)

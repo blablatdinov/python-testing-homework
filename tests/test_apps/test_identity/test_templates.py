@@ -5,6 +5,13 @@ from server.apps.identity.intrastructure.django.forms import RegistrationForm
 
 
 def test_registration():
-    page = render(RequestFactory().get('/identity/registration'), 'identity/pages/registration.html', {
-        'form': RegistrationForm(),
-    })
+    """Test registration template."""
+    page = render(
+        RequestFactory().get('/identity/registration'),
+        'identity/pages/registration.html',
+        {
+            'form': RegistrationForm(),
+        },
+    )
+
+    assert isinstance(page, str)

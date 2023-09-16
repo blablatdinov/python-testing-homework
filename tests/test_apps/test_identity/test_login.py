@@ -1,5 +1,8 @@
-from server.apps.identity.models import User
+from http import HTTPStatus
+
 import pytest
+
+from server.apps.identity.models import User
 
 pytestmark = [
     pytest.mark.django_db,
@@ -7,12 +10,14 @@ pytestmark = [
 
 
 def test(client):
+    """Test get login page."""
     got = client.get('/identity/login')
 
-    assert got.status_code == 200
+    assert got.status_code == HTTPStatus.OK
 
 
 def test_registration(client):
+    """Test registration."""
     got = client.post('/identity/registration', data={
         'email': 'my@email.com',
         'first_name': 'My name',
@@ -25,6 +30,6 @@ def test_registration(client):
         'password2': 'My name',
     })
 
-    assert got.status_code == 302
+    assert got.status_code == HTTPStatus.FOUND
     assert got.headers['location'] == '/identity/login'
     assert User.objects.count() == 1
