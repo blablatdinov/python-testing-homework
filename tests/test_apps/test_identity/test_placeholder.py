@@ -50,3 +50,17 @@ def test_update(mixer):
     LeadUpdate('https://domain.com', 5)(
         user=mixer.blend('identity.User', lead_id=1),
     )
+
+
+def test_create_slow(mixer):
+    """Test LeadCreate object."""
+    got = LeadCreate('http://localhost:3000/users', 5)(user=mixer.blend('identity.User'))
+
+    assert got == UserResponse(id=2)
+
+
+def test_update_slow(mixer):
+    """Test LeadUpdate object."""
+    LeadUpdate('http://localhost:3000/users/1', 5)(
+        user=mixer.blend('identity.User', lead_id=1),
+    )
