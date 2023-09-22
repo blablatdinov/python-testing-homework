@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import QuerySet
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView, TemplateView
 
@@ -76,7 +76,12 @@ class FavouritePicturesView(ListView[FavouritePicture]):
 @final
 @dispatch_decorator(login_required)
 class FavouriteDeleteView(View):
+    """View for delete picture from favourites."""
 
     def post(self, request, picture_id):
-        FavouritePicture.objects.filter(foreign_id=picture_id, user=request.user).delete()
+        """Deleting favourite picture for user."""
+        FavouritePicture.objects.filter(
+            foreign_id=picture_id,
+            user=request.user,
+        ).delete()
         return HttpResponseRedirect(reverse('pictures:dashboard'))
